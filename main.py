@@ -1,5 +1,6 @@
 
 import csv
+import random
 
 apartments = []
 
@@ -14,7 +15,11 @@ with open('jurmala.csv', newline='', encoding='utf-8') as csv_file:
 # remove header row
 apartments.pop(0)
 
-# print(apartments)
+# print(apartments[0][2])
+
+def sort_price(apartments):
+    return int(apartments[-1])
+
 
 while True:
     print("1. Get apartments by sequence number")
@@ -28,25 +33,46 @@ while True:
     choice = input("Enter your choice (1-6): ")
 
     if choice == '1':
-        # https://www.w3schools.com/python/python_lists_access.asp
+        Visi_apartamenti = 0
+        Visi_apartamenti = int(input("Kāds ir jūsu apartametu kārtas nummurs? Ievadiet to: "))
+        print("Apartamentu kārtas nummurs: ", Visi_apartamenti)
+        print(apartments[Visi_apartamenti])
+
         pass
     elif choice == '2':
-        # https://www.w3schools.com/python/python_lists_sort.asp
+        apartments.sort(key = sort_price, reverse = True)
+        print(apartments[0:10])
+
         pass
     elif choice == '3':
-        # https://www.w3schools.com/python/python_lists_sort.asp
+        apartments.sort(key = sort_price, reverse = False)
+        print(apartments[0:10])
+
         pass
     elif choice == '4':
-        # https://www.w3schools.com/python/python_lists_comprehension.asp
-        # https://www.w3schools.com/python/python_lists_access.asp - Range of Indexes
+        budzets = int(input("Ievadiet jūsu budžetu: "))
+        apartment_list = []
+
+        for apartment in apartments:
+            if int(apartment[8]) < budzets:
+                apartment_list.append(apartment)
+
+        print("Rekur apartamenti pēc jūsu budžeta ", apartment_list[:20])
+
         pass
     elif choice == '5':
-        # https://www.w3schools.com/python/python_lists_comprehension.asp
-        # https://www.w3schools.com/python/python_lists_access.asp - Range of Indexes
+        budzets = int(input("Ievadiet jūsu budžetu: "))
+        apartment_list = []
+
+        for apartment in apartments:
+            if int(apartment[8]) > budzets:
+                apartment_list.append(apartment)
+
+        print("Rekur apartamenti kuri ir lielāki nekā Jūsu budžets ", apartment_list[:20])
         pass
 
     elif choice == '6':
-        # 
+        
         pass
     elif choice == '7':
         print("Exiting")
@@ -55,5 +81,3 @@ while True:
         print("Invalid choice, choose from 1 to 7")
 
     print("==========================")
-
-
